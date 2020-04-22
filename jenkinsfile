@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 git 'https://github.com/ihatecodingaf/NewMavenRepo.git'
-                build 'job1'
+                build 'job2'
             }
         }
         stage('Test') {
@@ -16,6 +16,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'localserver', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'apache-tomcat-8.5.54/shutdown.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: 'Maven2/target/', sourceFiles: 'Maven2/target/Maven2.war'), sshTransfer(cleanRemote: false, excludes: '', execCommand: '''rm -rf apache-tomcat-8.5.54/webapps/ROOT
+                mv Maven2.war apache-tomcat-8.5.54/webapps/ROOT.war
+                apache-tomcat-8.5.54/startup.sh
+                ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
