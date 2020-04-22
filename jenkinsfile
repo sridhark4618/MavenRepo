@@ -16,8 +16,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-              sshPublisher(publishers: [sshPublisherDesc(configName: 'localserver', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''apache-tomcat-8.5.54/bin/shutdown.sh
-''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'target/SampleRegistration.war'), sshTransfer(cleanRemote: false, excludes: '', execCommand: '''rm -rf  apache-tomcat-8.5.54/webapps/ROOT
+sshPublisher(publishers: [sshPublisherDesc(configName: 'localserver', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''apache-tomcat-8.5.54/bin/shutdown.sh
+''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/SampleRegistration.war'), sshTransfer(cleanRemote: false, excludes: '', execCommand: '''rm -rf  apache-tomcat-8.5.54/webapps/ROOT
 mv SampleRegistration.war  apache-tomcat-8.5.54/webapps/ROOT.war
 apache-tomcat-8.5.54/bin/startup.sh''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])}
          }
