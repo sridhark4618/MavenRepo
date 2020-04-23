@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 git 'https://github.com/ihatecodingaf/NewMavenRepo.git'
-                build 'job3'
+                build 'MavenJob'
             }
         }
         stage('Test') {
