@@ -4,6 +4,7 @@
   <groupId>G1</groupId>
   
   <artifactId>Maven2</artifactId>
+  
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Maven2 Maven Webapp</name>
